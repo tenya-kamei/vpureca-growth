@@ -124,7 +124,7 @@ window.AB_TESTS = [
 
     // GTMが動く前に、すべてのイベントで使えるよう dataLayer へグループ名をセットしておく
     if (result.tracked) {
-      const initData = {};
+      const initData = { event: 'ab_test_init' };
       initData[result.groupProperty] = result.group;
       dataLayer.push(initData);
     }
