@@ -122,6 +122,13 @@ window.AB_TESTS = [
     assignments[test.method] = result;
     activeMethods.push(test.method);
 
+    // GTMが動く前に、すべてのイベントで使えるよう dataLayer へグループ名をセットしておく
+    if (result.tracked) {
+      const initData = {};
+      initData[result.groupProperty] = result.group;
+      dataLayer.push(initData);
+    }
+
     const scope = '[data-ab-test="' + test.method + '"]';
     const others = '[data-ab-only]:not([data-ab-only="' + result.group + '"])';
     hideRules.push(scope + ' ' + others, scope + others);
